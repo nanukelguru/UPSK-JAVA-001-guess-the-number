@@ -2,14 +2,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class Player {
-    private final String name;
-    private final ArrayList<Integer> guesses;
+    protected String name;
+    ArrayList<Integer> guesses = new ArrayList<>();
 
     //Constructor para inicializar el nombre y las suposiciones del jugador
     public Player(String name){
         this.name = name;
         this.guesses = new ArrayList<>();
     }
+
+    public Player() {
+        name = "";
+    }
+
     public int makeGuess() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(name + "enter your guess");
@@ -17,7 +22,7 @@ public abstract class Player {
         guesses.add(guess);
         return guess;
     }
-    public String ToString(){
+    public String getName(){
         return name;
     }
 

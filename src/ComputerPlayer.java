@@ -1,10 +1,12 @@
 public class ComputerPlayer extends Player {
-    public ComputerPlayer(String name) {
-        super(name);
+
+    public ComputerPlayer() {
+    super();
     }
+
     @Override
     public int makeGuess() {
-        return 0;
+        return (int)(Math.random()*100+1);
     }
 }
 

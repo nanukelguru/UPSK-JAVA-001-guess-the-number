@@ -5,18 +5,27 @@ public class GuessTheNumber {
     public static Random rand = new Random();
     //Variable target para almacenar el numero que los jugadores deben adivinar
     private static int targetNumber;
-    private static String guesses;
+    private static String humanGuesses = "";
+    private static String computerGuesses = "";
+    private static Player player;
 
     //Método main , punto de entrada del programa
     public static void main(String[] args) {
-
         targetNumber = rand.nextInt(100)+1;
-        while(true){
-            HumanPlayer human = new HumanPlayer("Human");
-            checkGuess(human);
+        HumanPlayer human = new HumanPlayer();
+        human.setName();
 
-            ComputerPlayer computer = new ComputerPlayer("Robot");
-            checkGuess(computer);
+        while(true){
+
+            int humanGuess = human.makeGuess();
+            humanGuesses += humanGuess + " ";
+            checkGuess(humanGuess, "Human");
+
+            ComputerPlayer computer = new ComputerPlayer();
+            int computerGuess = computer.makeGuess();
+            computerGuesses += computerGuess + " ";
+
+            checkGuess(computerGuess, "Computer");
 
             if(gameOver()){
                 break;
@@ -28,34 +37,24 @@ public class GuessTheNumber {
     }
 
     private static boolean gameOver() {
-        Object human = new Object();
-        Object computer = new Object();
-
-        if (!human.guesses.contains(targetNumber)) if (computer.guesses.contains(targetNumber)) {
-            return true;
-        }
-        else {
-            return true;
-        }
-        return false;
+        return humanGuesses.contains(Integer.toString(targetNumber)) ||
+                computerGuesses.contains(Integer.toString(targetNumber));
     }
 
-    private  static void checkGuess(Player player){
-        int guess = player.makeGuess();
+    public   static void checkGuess(int guess, String playerName){
+
         if(guess < targetNumber) {
-            System.out.println(player + " guessed " + guess + ". Too low!");
+            System.out.println(playerName + " guessed " + guess + ". Too low!");
         } else if(guess > targetNumber) {
-            System.out.println(player + " guessed " + guess + ". Too high!");
+            System.out.println(playerName + " guessed " + guess + ". Too high!");
         } else {
-            System.out.println(player + " guessed " + guess + ". Correct!");
-            System.out.println(player + " wins!");
+            System.out.println(playerName + " guessed " + guess + ". Correct!");
+            System.out.println(playerName + " wins!");
         }
     }
-
     private static void printResults() {
         System.out.println("Target number was: " + targetNumber);
-        System.out.println("Human's guesses: " + human.guesses);
-        System.out.println("Computer's guesses: " + computer.guesses);
+        System.out.println("Human's guesses: " + humanGuesses);
+        System.out.println("Computer's guesses: " + computerGuesses);
     }
-
 }
