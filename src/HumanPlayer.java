@@ -16,6 +16,4 @@ public class HumanPlayer extends Player {
         Scanner scanner = new Scanner(System.in);
         name = scanner.nextLine();
     }
-
-
 }

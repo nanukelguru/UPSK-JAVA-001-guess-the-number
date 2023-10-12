@@ -1,15 +1,14 @@
 import java.util.Random;
 
 public class GuessTheNumber {
-    //Declaración del objeto Random
+    //Declaring the Random Object
     public static Random rand = new Random();
-    //Variable target para almacenar el numero que los jugadores deben adivinar
-    private static int targetNumber;
-    private static String humanGuesses = "";
-    private static String computerGuesses = "";
-    private static Player player;
+    //Target variable to store the number that players must guess
+    public static int targetNumber;
+    public static String humanGuesses = "";
+    public static String computerGuesses = "";
 
-    //Método main , punto de entrada del programa
+    //Main method, program entry point
     public static void main(String[] args) {
         targetNumber = rand.nextInt(100)+1;
         HumanPlayer human = new HumanPlayer();
@@ -18,25 +17,23 @@ public class GuessTheNumber {
         while(true){
 
             int humanGuess = human.makeGuess();
-            humanGuesses += humanGuess + " ";
+            humanGuesses = humanGuesses + (humanGuess + " ");
             checkGuess(humanGuess, "Human");
 
             ComputerPlayer computer = new ComputerPlayer();
             int computerGuess = computer.makeGuess();
-            computerGuesses += computerGuess + " ";
+            computerGuesses = computerGuesses + (computerGuess + " ");
 
             checkGuess(computerGuess, "Computer");
 
             if(gameOver()){
                 break;
             }
-
         }
-       
         printResults();
     }
 
-    private static boolean gameOver() {
+    public static boolean gameOver() {
         return humanGuesses.contains(Integer.toString(targetNumber)) ||
                 computerGuesses.contains(Integer.toString(targetNumber));
     }

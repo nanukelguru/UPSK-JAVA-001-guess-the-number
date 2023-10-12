@@ -5,13 +5,7 @@ public abstract class Player {
     protected String name;
     ArrayList<Integer> guesses = new ArrayList<>();
 
-    //Constructor para inicializar el nombre y las suposiciones del jugador
-    public Player(String name){
-        this.name = name;
-        this.guesses = new ArrayList<>();
-    }
-
-    public Player() {
+     public Player() {
         name = "";
     }
 
